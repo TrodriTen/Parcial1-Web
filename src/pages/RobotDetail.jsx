@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import "./RobotList.css";
 
 function RobotDetail() {
   const { id } = useParams();
@@ -24,7 +23,7 @@ function RobotDetail() {
   if (!robot) return <div className="text-center my-5">Robot no encontrado</div>;
 
   return (
-    <div className="container-fluid mt-4 text-center px-5">
+    <div className="container my-5">
       <Link to="/robots" className="btn btn-outline-secondary mb-4">
         &larr; Volver al listado
       </Link>
@@ -35,7 +34,7 @@ function RobotDetail() {
             <img
               src={robot.imagen}
               alt={robot.nombre}
-              className="img-fluid my-4"
+              className="img-fluid rounded-start card-img-detail"
             />
           </div>
           <div className="col-md-6">
