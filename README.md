@@ -17,3 +17,7 @@ If you are developing a production application, we recommend using TypeScript an
 - Tomas Alberto Rodriguez Peña 
 - 202212868
 - t.rodriguezp@uniandes.edu.co
+
+## Ejecucion 
+
+- npm run dev
