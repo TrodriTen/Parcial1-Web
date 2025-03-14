@@ -8,7 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const intl = useIntl(); // 👈 para traducir placeholders
+  const intl = useIntl();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -38,14 +38,35 @@ const Login = () => {
   };
 
   return (
-    <div className="container-fluid mt-4 text-center px-5">
-      <h1><FormattedMessage id="title" /></h1>
-      <img src="src/public/Banner.png" alt="Robots" className="img-fluid my-4" />
-      <form onSubmit={handleLogin}>
-        <h2><FormattedMessage id="loginTitle" /></h2>
+    <div className="container-fluid mt-4 px-4 d-flex flex-column align-items-center">
+      {/* Selector de idioma (opcional)
+      <div className="text-end w-100 mb-2">
+        <select
+          value={locale}
+          onChange={(e) => setLocale(e.target.value)}
+          className="form-select-sm"
+        >
+          <option value="es">Español</option>
+          <option value="en">English</option>
+        </select>
+      </div> */}
+
+      <h1 className="text-center mb-3">
+        <FormattedMessage id="title" defaultMessage="Adopta un Robot con Robot Lovers!" />
+      </h1>
+
+      <div className="text-center mb-4">
+        <img src="src/public/Banner.png" alt="Robots" className="img-fluid" />
+      </div>
+
+      <form onSubmit={handleLogin} className="w-100" style={{ maxWidth: '400px' }}>
+        <h2 className="mb-3 text-center">
+          <FormattedMessage id="loginTitle" defaultMessage="Inicio de sesión" />
+        </h2>
 
         <input
           type="text"
+          className="form-control mb-2"
           placeholder={intl.formatMessage({ id: 'username' })}
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -53,33 +74,35 @@ const Login = () => {
         />
         <input
           type="password"
+          className="form-control mb-3"
           placeholder={intl.formatMessage({ id: 'password' })}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        {error && <p className="error-msg">{error}</p>}
 
-        <div className="buttons">
-          <button type="submit" className="btn-ingresar">
-            <FormattedMessage id="login" />
+        {error && <p className="text-danger">{error}</p>}
+
+        <div className="d-flex justify-content-between">
+          <button type="submit" className="btn btn-primary">
+            <FormattedMessage id="login" defaultMessage="Ingresar" />
           </button>
           <button
             type="button"
-            className="btn-cancelar"
+            className="btn btn-danger"
             onClick={() => {
               setUsername('');
               setPassword('');
               setError('');
             }}
           >
-            <FormattedMessage id="cancel" />
+            <FormattedMessage id="cancel" defaultMessage="Cancelar" />
           </button>
         </div>
       </form>
 
-      <footer>
-        <FormattedMessage id="contact" />
+      <footer className="text-center mt-4">
+        <FormattedMessage id="contact" defaultMessage="Contact us: +57 3102105253 - info@robot-lovers.com - @robot-lovers" />
       </footer>
     </div>
   );

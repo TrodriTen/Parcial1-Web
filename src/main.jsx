@@ -1,21 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import { IntlProvider } from 'react-intl';
-import messages_es from './i18n/messages_es';
-import messages_en from './i18n/messages_en';
+import messagesEs from './i18n/messages_es.js';
+import messagesEn from './i18n/messages_en.js';
 
 const messages = {
-  es: messages_es,
-  en: messages_en
+  es: messagesEs,
+  en: messagesEn,
 };
 
-const language = navigator.language.split(/[-_]/)[0]; // "es" o "en"
+const Root = () => {
+  const [locale, setLocale] = useState('es');
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <IntlProvider locale={language} messages={messages[language]}>
+  return (
+    <IntlProvider locale={locale} messages={messages[locale]}>
+      {/* Selector visible en toda la app */}
+      <div className="language-selector text-end px-3 pt-2">
+        <select value={locale} onChange={(e) => setLocale(e.target.value)} className="form-select-sm">
+          <option value="es">Español</option>
+          <option value="en">English</option>
+        </select>
+      </div>
       <App />
     </IntlProvider>
-  </React.StrictMode>
-);
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(<Root />);
