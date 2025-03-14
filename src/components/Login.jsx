@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FormattedMessage, useIntl } from 'react-intl';
 import './Login.css';
 
 const Login = () => {
@@ -7,6 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const intl = useIntl(); // 👈 para traducir placeholders
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,7 +19,7 @@ const Login = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          login: username, // 👈 importante que sea "login"
+          login: username,
           password: password,
         }),
       });
@@ -35,38 +37,50 @@ const Login = () => {
     }
   };
 
-  // 👇 Este return debe estar dentro de la función Login
   return (
     <div className="container-fluid mt-4 text-center px-5">
-      <h1>Adopta un Robot con Robot Lovers!</h1>
+      <h1><FormattedMessage id="title" /></h1>
       <img src="src/public/Banner.png" alt="Robots" className="img-fluid my-4" />
       <form onSubmit={handleLogin}>
-        <h2>Inicio de sesión</h2>
+        <h2><FormattedMessage id="loginTitle" /></h2>
+
         <input
           type="text"
-          placeholder="Nombre de usuario"
+          placeholder={intl.formatMessage({ id: 'username' })}
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
         />
         <input
           type="password"
-          placeholder="Contraseña"
+          placeholder={intl.formatMessage({ id: 'password' })}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
         {error && <p className="error-msg">{error}</p>}
+
         <div className="buttons">
-          <button type="submit" className="btn-ingresar">Ingresar</button>
-          <button type="button" className="btn-cancelar" onClick={() => {
-            setUsername('');
-            setPassword('');
-            setError('');
-          }}>Cancelar</button>
+          <button type="submit" className="btn-ingresar">
+            <FormattedMessage id="login" />
+          </button>
+          <button
+            type="button"
+            className="btn-cancelar"
+            onClick={() => {
+              setUsername('');
+              setPassword('');
+              setError('');
+            }}
+          >
+            <FormattedMessage id="cancel" />
+          </button>
         </div>
       </form>
-      <footer>Contact us: +57 3102105253 - info@robot-lovers.com - @robot-lovers</footer>
+
+      <footer>
+        <FormattedMessage id="contact" />
+      </footer>
     </div>
   );
 };

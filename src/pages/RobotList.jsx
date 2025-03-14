@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const RobotsList = () => {
@@ -21,11 +22,13 @@ const RobotsList = () => {
 
   return (
     <div className="d-flex flex-column min-vh-100 text-center px-4" style={{ backgroundColor: "white" }}>
-      <h1 className="text-center my-4">Adopta un Robot con Robot Lovers!</h1>
-      <div className="text-center mb-4">
-      <img src="src/public/Banner.png" alt="Robots" className="img-fluid my-4" />
-      </div>
+      <h1 className="text-center my-4">
+        <FormattedMessage id="title" defaultMessage="Adopta un Robot con Robot Lovers!" />
+      </h1>
 
+      <div className="text-center mb-4">
+        <img src="src/public/Banner.png" alt="Robots" className="img-fluid my-4" />
+      </div>
 
       <div className="row">
         {/* Tabla */}
@@ -34,9 +37,9 @@ const RobotsList = () => {
             <thead className="table-dark text-center">
               <tr>
                 <th>ID</th>
-                <th>Nombre</th>
-                <th>Modelo</th>
-                <th>Empresa Fabricante</th>
+                <th><FormattedMessage id="name" defaultMessage="Nombre" /></th>
+                <th><FormattedMessage id="model" defaultMessage="Modelo" /></th>
+                <th><FormattedMessage id="manufacturer" defaultMessage="Empresa Fabricante" /></th>
               </tr>
             </thead>
             <tbody>
@@ -62,20 +65,27 @@ const RobotsList = () => {
             <div className="card shadow-sm">
               <div className="card-body text-center">
                 <h5 className="card-title text-primary">{selectedRobot.nombre}</h5>
-                  <img
+                <img
                   src={selectedRobot.imagen.replace("github.com", "raw.githubusercontent.com").replace("/blob", "")}
                   alt={selectedRobot.nombre}
                   className="img-fluid mb-3"
                   style={{ maxHeight: '200px', objectFit: 'contain' }}
-                  />
-                <p><strong>→ Año de Fabricación:</strong> {selectedRobot.añoFabricacion}</p>
-                <p><strong>→ Capacidad de Procesamiento:</strong> {selectedRobot.capacidadProcesamiento}</p>
-                <p><strong>→ Humor:</strong> {selectedRobot.humor}</p>
+                />
+                <p>
+                  <strong>→ <FormattedMessage id="year" defaultMessage="Año de Fabricación" />:</strong> {selectedRobot.añoFabricacion}
+                </p>
+                <p>
+                  <strong>→ <FormattedMessage id="processing" defaultMessage="Capacidad de Procesamiento" />:</strong> {selectedRobot.capacidadProcesamiento}
+                </p>
+                <p>
+                  <strong>→ <FormattedMessage id="humor" defaultMessage="Humor" />:</strong> {selectedRobot.humor}
+                </p>
               </div>
             </div>
           )}
         </div>
       </div>
+
       <footer className="text-center mt-4 mb-2">
         Contact us: +57 3102105253 - info@robot-lovers.com - @robot-lovers
       </footer>
