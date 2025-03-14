@@ -20,15 +20,10 @@ const RobotsList = () => {
   };
 
   return (
-    <div className="container-fluid px-4" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+    <div className="d-flex flex-column min-vh-100 text-center px-4" style={{ backgroundColor: "white" }}>
       <h1 className="text-center my-4">Adopta un Robot con Robot Lovers!</h1>
       <div className="text-center mb-4">
-        <img
-          src="src/public/Banner.png"
-          alt="Banner"
-          className="img-fluid"
-          style={{ width: '100%', maxWidth: '1143px', height: 'auto' }}
-        />
+      <img src="src/public/Banner.png" alt="Robots" className="img-fluid my-4" />
       </div>
 
 
@@ -81,7 +76,6 @@ const RobotsList = () => {
           )}
         </div>
       </div>
-
       <footer className="text-center mt-4 mb-2">
         Contact us: +57 3102105253 - info@robot-lovers.com - @robot-lovers
       </footer>
